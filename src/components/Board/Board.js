@@ -20,7 +20,7 @@ class Board extends Component {
       metropolitan: []
     };
 
-    this.update = this.update.bind();
+    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
