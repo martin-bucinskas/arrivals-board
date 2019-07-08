@@ -135,7 +135,7 @@ describe('Board component', () => {
       let index = 0;
 
       Object.keys(sortedArrivals).forEach(key => {
-        expect(key).to.be.equal(sortedArrivalKeys[index]);
+        expect(key).to.be.equal(sortedArrivalKeys[index].toString());
         index++;
       });
     });
