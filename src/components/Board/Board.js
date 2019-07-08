@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
+import tflApiConfig from './tflApi.config';
+
+require('signalr');
+require('./signalr-hub');
 
 class Board extends Component {
 
@@ -9,10 +14,34 @@ class Board extends Component {
     this.state = {
 
     };
+
+    this.update = this.update.bind();
   }
 
   componentDidMount() {
-    // TODO: Subscribe to TFL Push API
+    $.connection.hub.url = tflApiConfig.tflAPI;
+
+    const hub = $.connection.predictionsRoomHub;
+
+    hub.client.showPredictions = this.update;
+
+    $.connection.hub.start().done(() => {
+      hub.server.addLineRooms(this.getLineRooms());
+    });
+  }
+
+  update(arrivals) {
+
+  }
+
+  getLineRooms() {
+    const lineRooms = [];
+
+    tflApiConfig.stations[tflApiConfig.stationToDisplay].lines.forEach(line => {
+      lineRooms.push({ 'LineId' : line, 'NaptanId' : tflApiConfig.stations[tflApiConfig.stationToDisplay].naptanId });
+    });
+
+    return lineRooms;
   }
 
   componentWillUnmount() {
