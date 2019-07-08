@@ -77,6 +77,14 @@ class Board extends Component {
     // TODO: Cancel subscriptions and close connection.
   }
 
+  sortMap(arrivals) {
+    return Object.keys(arrivals)
+      .sort()
+      .reduce((acc, key) => ({
+        ...acc, [key]: arrivals[key]
+      }), {});
+  }
+
   // TODO: Render Arrival array
   render() {
     return (<>
