@@ -114,16 +114,16 @@ describe('Board component', () => {
       let signalRComponentClass = new Board();
 
       let unsorted = new Map();
-      unsorted.set(new Date('Mon Jul 08 2019 17:20:00 GMT+0100 (BST)'), {});
-      unsorted.set(new Date('Mon Jul 08 2019 13:24:00 GMT+0100 (BST)'), {});
-      unsorted.set(new Date('Mon Jul 08 2019 16:22:00 GMT+0100 (BST)'), {});
-      unsorted.set(new Date('Mon Jul 08 2019 19:26:00 GMT+0100 (BST)'), {});
+      unsorted.set(new Date('Mon Jul 08 2019 17:20:00'), {});
+      unsorted.set(new Date('Mon Jul 08 2019 13:24:00'), {});
+      unsorted.set(new Date('Mon Jul 08 2019 16:22:00'), {});
+      unsorted.set(new Date('Mon Jul 08 2019 19:26:00'), {});
 
       const sortedArrivalKeys = [
-        'Mon Jul 08 2019 13:24:00 GMT+0100 (BST)',
-        'Mon Jul 08 2019 16:22:00 GMT+0100 (BST)',
-        'Mon Jul 08 2019 17:20:00 GMT+0100 (BST)',
-        'Mon Jul 08 2019 19:26:00 GMT+0100 (BST)'
+        new Date('Mon Jul 08 2019 13:24:00'),
+        new Date('Mon Jul 08 2019 16:22:00'),
+        new Date('Mon Jul 08 2019 17:20:00'),
+        new Date('Mon Jul 08 2019 19:26:00')
       ];
 
       let arrivals = Array.from(unsorted);
