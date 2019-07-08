@@ -25,7 +25,7 @@ Node | v8.16.0
 #### To install this locally:
 
 ```
-git clone git@github/happysad-/arrivals-board.git
+git clone git@github:happysad-/arrivals-board.git
 cd arrivals-board
 nvm use
 yarn install
