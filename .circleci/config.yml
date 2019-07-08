@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:carbon
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies
+      - run:
+          name: Install Dependencies with Yarn
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+            - ~/.cache
+      - run:
+          name: Run Jest Tests
+          command: node_modules/.bin/jest
+  deploy:
+    machine: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3c:50:54:62:4c:38:7f:f4:16:a0:fb:25:b8:02:9a:27"
+            - "SHA256:MSDPABuLJ7RyFx/w633EOOwJ+n2WC3G95iBbppWvHVw"
+      - run:
+          name: Deploy app to $DEV_SERVER_IP server
+          command: |
+            ssh -o StrictHostKeyChecking=no $DEV_SERVER_USER@$DEV_SERVER_IP "/bin/bash ./deploy.sh"
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
