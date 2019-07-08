@@ -85,10 +85,40 @@ class Board extends Component {
       }), {});
   }
 
-  // TODO: Render Arrival array
   render() {
-    return (<>
+    const arrivals = Array.from(new Map([...this.state.hammersmith].concat([...this.state.circle].concat([...this.state.metropolitan]))));
 
+    let eastbound = [];
+    let westbound = [];
+
+    if(arrivals.length > 1) {
+      eastbound = arrivals.filter(entry => { return entry[0] !== undefined ? entry[1]['direction'].includes('Eastbound') : null })
+        .reduce((map, entry) => (map[entry[0]] = entry[1]['arrival'], map), {});
+      westbound = arrivals.filter(entry => { return entry[0] !== undefined ? entry[1]['direction'].includes('Westbound') : null })
+        .reduce((map, entry) => (map[entry[0]] = entry[1]['arrival'], map), {});
+      eastbound = this.sortMap(eastbound);
+      westbound = this.sortMap(westbound);
+    }
+
+    return (<>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <h2><b>Platform 1 (Westbound)</b></h2>
+            <hr/>
+            <div id="departures-westbound">
+              { arrivals.length < 1? 'Loading...' : Object.values(westbound) }
+            </div>
+          </div>
+          <div className="col">
+            <h2><b>Platform 2 (Eastbound)</b></h2>
+            <hr/>
+            <div id="departures-eastbound">
+              { arrivals.length < 1 ? 'Loading...' : Object.values(eastbound) }
+            </div>
+          </div>
+        </div>
+      </div>
     </>);
   }
 }
