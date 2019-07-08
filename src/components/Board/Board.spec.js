@@ -46,10 +46,10 @@ describe('Board component', () => {
 
   describe('Unit Tests', () => {
     it('generates arrival component map when given an array of arrival data', () => {
-      let signalRComponentClass = new Board();
+      let board = new Board();
 
       testArrivalData.forEach(testData => {
-        let generatedMap = signalRComponentClass.generateArrivals(testData);
+        let generatedMap = board.generateArrivals(testData);
 
         expect(generatedMap.size).to.be.equal(4);
 
@@ -65,14 +65,14 @@ describe('Board component', () => {
     });
 
     it('attempts to subscribe to API and add line rooms when component mounts', () => {
-      let signalRComponentClass = new Board();
+      let board = new Board();
       let expectedHub = [{"name":"predictionsroomhub"}];
 
       expect($.connection.hub.url).to.be.equal(stationConfig.tflAPI);
 
       let spy = sinon.spy($.connection.hub, 'start');
 
-      signalRComponentClass.componentDidMount();
+      board.componentDidMount();
 
       expect(spy.calledOnce, 'Component should mount only once per page request').to.be.equal(true);
 
@@ -82,7 +82,7 @@ describe('Board component', () => {
     });
 
     it('creates an array of tube lines containing line id and naptan id', () => {
-      let signalRComponentClass = new Board();
+      let board = new Board();
 
       let expectedArray = [
         { 'LineId': 'circle', 'NaptanId': '940GZZLUGPS' },
@@ -90,17 +90,17 @@ describe('Board component', () => {
         { 'LineId': 'hammersmith-city', 'NaptanId': '940GZZLUGPS' }
       ];
 
-      let actualArray = signalRComponentClass.getLineRooms();
+      let actualArray = board.getLineRooms();
 
       expect(actualArray).to.be.deep.equal(expectedArray);
     });
 
     it('updates state variables depending which LineId was given', () => {
-      let signalRComponentClass = new Board();
-      let generateArrivalsStub = sinon.stub(signalRComponentClass, 'setState');
+      let board = new Board();
+      let generateArrivalsStub = sinon.stub(board, 'setState');
 
       testArrivalData.forEach(testData => {
-        signalRComponentClass.update(testData);
+        board.update(testData);
       });
 
       expect(generateArrivalsStub.getCall(0).args[0]).to.have.keys('hammersmith');
@@ -111,7 +111,7 @@ describe('Board component', () => {
     });
 
     it('sorts an unsorted map by key in an ascending order', () => {
-      let signalRComponentClass = new Board();
+      let board = new Board();
 
       let unsorted = new Map();
       unsorted.set(new Date('Mon Jul 08 2019 17:20:00'), {});
@@ -130,7 +130,7 @@ describe('Board component', () => {
 
       arrivals = arrivals.reduce((map, entry) => (map[entry[0]] = entry[1]['arrival'], map), {});
 
-      let sortedArrivals = signalRComponentClass.sortMap(arrivals);
+      let sortedArrivals = board.sortMap(arrivals);
 
       let index = 0;
 
@@ -145,12 +145,11 @@ describe('Board component', () => {
 
     it('generate arrivals and sort them into their state variable', () => {
       const div = document.createElement('div');
-      let signalRComponentClass = ReactDOM.render(<Board/>, div);
-      // let signalRComponentClass = new Board();
-      let spy = sinon.spy(signalRComponentClass, 'generateArrivals');
+      let board = ReactDOM.render(<Board/>, div);
+      let spy = sinon.spy(board, 'generateArrivals');
 
       testArrivalData.forEach(testData => {
-        signalRComponentClass.update(testData);
+        board.update(testData);
       });
 
       expect(spy.getCall(0).thisValue.state.hammersmith.size).to.be.equal(4);
