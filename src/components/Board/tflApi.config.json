@@ -1,0 +1,14 @@
+{
+  "tflAPI": "https://push-api.tfl.gov.uk/signalr/hubs/signalr/",
+  "stationToDisplay": "great-portland-street",
+  "stations": {
+    "great-portland-street": {
+      "naptanId": "940GZZLUGPS",
+      "lines": [
+        "circle",
+        "metropolitan",
+        "hammersmith-city"
+      ]
+    }
+  }
+}
