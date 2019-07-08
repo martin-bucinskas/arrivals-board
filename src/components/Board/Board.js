@@ -3,6 +3,9 @@ import $ from 'jquery';
 import tflApiConfig from './tflApi.config';
 import Arrival from '../Arrival/Arrival';
 
+// Hack to make jQuery work with webpacked SignalR in React
+window.jQuery = $;
+
 require('signalr');
 require('./signalr-hub');
 
