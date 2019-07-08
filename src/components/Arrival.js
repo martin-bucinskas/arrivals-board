@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Arrival.css';
 
 class Arrival extends Component {
 
@@ -12,6 +13,10 @@ class Arrival extends Component {
     };
   }
 
+  static calculateCountdownInMinutes(date) {
+    return Math.round((date - new Date()) / (1000 * 60));
+  }
+
   render() {
     return (<>
       <div className="row" id="arrival">
@@ -20,7 +25,9 @@ class Arrival extends Component {
         </div>
         <div className="col" id="arrival-time">
           {
-            this.state.expectedArrival
+            Arrival.calculateCountdownInMinutes(this.state.expectedArrival)  > 0 ?
+              Arrival.calculateCountdownInMinutes(this.state.expectedArrival) +  ' mins' :
+              'due'
           }
         </div>
       </div>
