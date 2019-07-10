@@ -9,3 +9,29 @@
 #arrival-time {
 
 }
+
+#arrival-line-colour-box {
+    width: 10px;
+}
+
+.arrival-line-colour {
+    background-color: antiquewhite;
+    /*width: 24px;*/
+    height: 100%;
+    width: 5px;
+    /*border: 1px solid antiquewhite;*/
+    /*padding: 5px;*/
+    /*margin: 5px;*/
+}
+
+#arrival-line-hammersmith-city {
+    background-color: deeppink;
+}
+
+#arrival-line-circle {
+    background-color: yellow;
+}
+
+#arrival-line-metropolitan {
+    background-color: purple;
+}
