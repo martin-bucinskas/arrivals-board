@@ -9,3 +9,74 @@
 #arrival-time {
 
 }
+
+#arrival-line-colour-box {
+    width: 10px;
+}
+
+.arrival-line-colour {
+    background-color: antiquewhite;
+    /*width: 24px;*/
+    height: 100%;
+    width: 5px;
+    /*border: 1px solid antiquewhite;*/
+    /*padding: 5px;*/
+    /*margin: 5px;*/
+}
+
+#arrival-line-hammersmith-city {
+    background-color: deeppink;
+}
+
+#arrival-line-circle {
+    background-color: yellow;
+}
+
+#arrival-line-metropolitan {
+    background-color: purple;
+}
+
+#arrival-line-bakerloo {
+    background-color: saddlebrown;
+}
+
+#arrival-line-central {
+    background-color: red;
+}
+
+#arrival-line-district {
+    background-color: green;
+}
+
+#arrival-line-dlr {
+    background-color: lightseagreen;
+}
+
+#arrival-line-jubilee {
+    background-color: grey;
+}
+
+#arrival-line-overground {
+    background-color: orangered;
+}
+
+#arrival-line-northern {
+    border: 1px solid antiquewhite;
+    background-color: black;
+}
+
+#arrival-line-picadilly {
+    background-color: darkblue;
+}
+
+#arrival-line-victoria{
+    background-color: dodgerblue;
+}
+
+#arrival-line-waterloo-city {
+    background-color: lightskyblue;
+}
+
+#arrival-line-elizabeth {
+    background-color: mediumpurple;
+}

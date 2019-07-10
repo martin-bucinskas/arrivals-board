@@ -77,6 +77,6 @@ Here are some of the ideas to be implemented in the future.
  - [ ] Northbound and Southbound trains
  - [x] Push API to prevent continous polling
  - [ ] Populate tflApi.config.json with extra stations
- - [ ] Display the line colour next to the arrival time
+ - [x] Display the line colour next to the arrival time
  - [ ] Star your favourite train / time and keep tabs on it
  - [ ] Additional information about arriving train
