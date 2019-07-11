@@ -55,6 +55,9 @@ class Board extends Component {
     let arrivalsMap = new Map();
 
     arrivals.forEach(arrival => {
+
+      console.log(arrival);
+
       let arrivalEntry = {
         direction: arrival.PlatformName,
         arrival: <Arrival towards={ arrival.Towards } expectedArrival={ arrival.ExpectedArrival } platformName={ arrival.PlatformName } lineId={ arrival.LineId } key={ 'arrival-' + arrival.Id }/>

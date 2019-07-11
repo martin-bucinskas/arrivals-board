@@ -11,11 +11,27 @@ class Arrival extends Component {
       expectedArrival: new Date(props.expectedArrival),
       platformName: props.platformName,
       lineId: props.lineId,
+      currentLocation: props.currentLocation,
+      vehicleId: props.vehicleId,
+      showMoreInformation: false
     };
   }
 
   static calculateCountdownInMinutes(date) {
     return Math.round((date - new Date()) / (1000 * 60));
+  }
+
+  renderMoreInformation() {
+    return (<>
+      <div className="row" id="arrival-more-information">
+        <div className="col" id="arrival-current-location">
+          Location: { this.state.currentLocation }
+        </div>
+        <div className="col" id="arrival-vehicle-id">
+          Vehicle ID: { this.state.vehicleId }
+        </div>
+      </div>
+    </>);
   }
 
   render() {
@@ -35,6 +51,10 @@ class Arrival extends Component {
           }
         </div>
       </div>
+      {
+        this.state.showMoreInformation &&
+        this.renderMoreInformation()
+      }
       <hr/>
     </>);
   }
@@ -44,7 +64,9 @@ Arrival.defaultProps = {
   towards: 'Check front of train',
   expectedArrival: new Date(),
   platformName: '',
-  line: 'unknown'
+  line: 'unknown',
+  currentLocation: 'unknown',
+  vehicleId: 0
 };
 
 export default Arrival;
