@@ -15,10 +15,16 @@ class Arrival extends Component {
       vehicleId: props.vehicleId,
       showMoreInformation: false
     };
+
+    this.toggleShowMoreInformation = this.toggleShowMoreInformation.bind(this);
   }
 
   static calculateCountdownInMinutes(date) {
     return Math.round((date - new Date()) / (1000 * 60));
+  }
+
+  toggleShowMoreInformation() {
+    this.setState({ showMoreInformation: !this.state.showMoreInformation });
   }
 
   renderMoreInformation() {
@@ -36,25 +42,27 @@ class Arrival extends Component {
 
   render() {
     return (<>
-      <div className="row" id="arrival">
-        <div className="col-1" id="arrival-line-colour-box">
-          <div className="arrival-line-colour" id={ 'arrival-line-' + this.state.lineId }/>
+      <div id="arrival-clickable" onClick={ this.toggleShowMoreInformation }>
+        <div className="row" id="arrival">
+          <div className="col-1" id="arrival-line-colour-box">
+            <div className="arrival-line-colour" id={ 'arrival-line-' + this.state.lineId }/>
+          </div>
+          <div className="col-8" id="arrival-towards">
+            { this.state.towards.toUpperCase() }
+          </div>
+          <div className="col-2" id="arrival-time">
+            {
+              Arrival.calculateCountdownInMinutes(this.state.expectedArrival)  > 0 ?
+                Arrival.calculateCountdownInMinutes(this.state.expectedArrival) +  ' mins' :
+                'due'
+            }
+          </div>
         </div>
-        <div className="col-8" id="arrival-towards">
-          { this.state.towards.toUpperCase() }
-        </div>
-        <div className="col-2" id="arrival-time">
-          {
-            Arrival.calculateCountdownInMinutes(this.state.expectedArrival)  > 0 ?
-              Arrival.calculateCountdownInMinutes(this.state.expectedArrival) +  ' mins' :
-              'due'
-          }
-        </div>
+        {
+          this.state.showMoreInformation &&
+          this.renderMoreInformation()
+        }
       </div>
-      {
-        this.state.showMoreInformation &&
-        this.renderMoreInformation()
-      }
       <hr/>
     </>);
   }

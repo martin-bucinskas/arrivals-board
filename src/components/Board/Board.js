@@ -58,9 +58,19 @@ class Board extends Component {
 
       console.log(arrival);
 
+      let arrivalProps = {
+        towards: arrival.Towards,
+        expectedArrival: arrival.ExpectedArrival,
+        platformName: arrival.PlatformName,
+        lineId: arrival.LineId,
+        currentLocation: arrival.CurrentLocation,
+        vehicleId: arrival.VehicleId,
+        key: 'arrival-' + arrival.Id
+      };
+
       let arrivalEntry = {
         direction: arrival.PlatformName,
-        arrival: <Arrival towards={ arrival.Towards } expectedArrival={ arrival.ExpectedArrival } platformName={ arrival.PlatformName } lineId={ arrival.LineId } key={ 'arrival-' + arrival.Id }/>
+        arrival: <Arrival {...arrivalProps}/>
       };
 
       arrivalsMap.set(new Date(arrival.ExpectedArrival), arrivalEntry);
