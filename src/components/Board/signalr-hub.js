@@ -94,6 +94,10 @@
   };
 
   signalR.hub = $.hubConnection("/signalr", { useDefaultPath: false });
+
+  console.log('=======================================================');
+  console.log(signalR.hub);
+
   $.extend(signalR, signalR.hub.createHubProxies());
 
 }(window.jQuery, window));
